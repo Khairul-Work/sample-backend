@@ -9,7 +9,6 @@ interface PostService {
     fun getAllPosts(): List<PostModel>
     fun updatePost(post: PostModel): PostModel?
     fun deletePost(id: Long)
-
     fun getPostsByUserId(userId:Long): List<PostModel>
 }
 

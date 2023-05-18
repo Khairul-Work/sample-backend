@@ -44,19 +44,21 @@ class UserController @Autowired constructor(private val userService: UserService
 
     // Get a user by ID
     @GetMapping("/{id}")
-    fun getUser(@PathVariable("id") id: Long): UserModel {
-        val user = userService.getUser(id)
+    fun getUser(@PathVariable("id") id: Long): UserModel? {
+        //if only you want to do something with user data before returning
+//        val user = userService.getUser(id)
+//
+//        // Access the properties using the getter methods
+//        val userId = user?.id
+//        val name = user?.name
+//        val username = user?.username
+//        val email = user?.email
+//
+//        // Process the user object as needed
+//        // ...
 
-        // Access the properties using the getter methods
-        val userId = user?.id
-        val name = user?.name
-        val username = user?.username
-        val email = user?.email
-
-        // Process the user object as needed
-        // ...
-
-        return user!!
+//        return user!!
+        return userService.getUser(id)
     }
 
     // Update a user
@@ -64,12 +66,15 @@ class UserController @Autowired constructor(private val userService: UserService
     fun updateUser(@PathVariable("id") id: Long, @RequestBody updatedUser: UserModel): UserModel? {
         val user = userService.getUser(id)
 
-        // Access the properties using the setter methods
-        user?.name = updatedUser.name
-        user?.username = updatedUser.username
-        user?.email = updatedUser.email
+        if(user != null){
+            // Access the properties using the setter methods
+            user.name = updatedUser.name
+            user.username = updatedUser.username
+            user.email = updatedUser.email
 
-        return userService.updateUser(id, user!!)
+            return userService.updateUser(user)
+        }
+        return null
     }
 
     // Delete a user
