@@ -14,23 +14,20 @@ import lombok.NoArgsConstructor
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "User")
-@Table(name = "users")
+@Table(name = "users", schema = "sample")
 class UserModel {
-
         // Add more properties as needed
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(nullable = false, updatable = false)
         var id: Long? = null
                 private set
+        @Column(nullable = false)
+        var password: String? = null
+        var firstName: String? = null
+        var lastName: String? = null
+        var age: Int? = null
         var name: String? = null
         var username: String? = null
         var email: String? = null
-
-//        // Constructor without the id parameter
-//        constructor(name: String?, username: String?, email: String?) : this(email, name, username) {
-//                this.name = name
-//                this.username = username
-//                this.email = email
-//        }
 }
